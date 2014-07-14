@@ -18,3 +18,12 @@ RewriteCond $1 !^(index\.php|resources|robots\.txt)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L,QSA] 
+
+
+#Removing index.php from relative urls like http://www.example.com/index.php/modules/info will be redirected to http://www.example.com/modules/info
+
+RewriteCond %{HTTP_HOST} ^ibef\.org [nc]
+RewriteRule (.*) http://www.example.com/$1 [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^.*index.php.*
+RewriteRule ^(.*)index.php(.*)$ $1$2 [NC,R=301,L]
