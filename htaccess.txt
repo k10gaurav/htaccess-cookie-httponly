@@ -5,11 +5,14 @@
 #Header edit Set-Cookie ^(.*)$ $1;Secure;HttpOnly
 #Header set Set-Cookie "%{http_cookie}e; HTTPOnly" env=http_cookie   
 
+
+
 #Custom code to prevent server from clickjacking attack
 Header append X-FRAME-OPTIONS "SAMEORIGIN"
 Header append X-FRAME-OPTIONS "DENY"
 
-#Removing index.php in codeigniter
+
+#Removing index.php
 RewriteEngine on
 RewriteCond $1 !^(index\.php|resources|robots\.txt)
 RewriteCond %{REQUEST_FILENAME} !-f
